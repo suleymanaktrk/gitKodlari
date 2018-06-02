@@ -1,0 +1,22 @@
+ git config --global user.email "suleymanaktrk@gmail.com"
+ git config --global user.name "Suleyman Akturk"
+ pwd
+ ls
+ cd Desktop
+ clear
+ git init
+ ls -a
+ git add .
+ git add dosya.txt
+ git commit -m "acıklama"
+ git log
+ git status
+ git diff
+ git diff --staged
+ git add dosya.txt
+ git rm -r silinecekler
+ git mv deneme1.py deneme2.txt
+ git checkout -- index.txt
+ git reset HEAD index.txt
+ git checkout -- index.txt
+ git checkout b92de12793b3e70db15f39341d84ab85fc77aca7 -- .
