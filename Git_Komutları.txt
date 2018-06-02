@@ -1,0 +1,144 @@
+ //- Git bilgisayar yapılandırma.
+ git config --global user.email "suleymanaktrk@gmail.com"
+ git config --global user.name "Suleyman Akturk"
+
+//-mevcut dizinin tam adresi
+pwd
+
+//-Mevcut dizinin içindekileri lisreleme
+ls
+
+//dizin değiştirme 
+cd Desktop
+
+//-Ekran temizleme 
+clear
+//-------------------
+
+//Dizinin gir projesi olması için dizinin içinde iken
+git init
+
+//gizli dosyaları listelemek için 
+ls -a
+
+//dizinda bulunan bütün dosyaları git deposuna yüklemek için(dosyaları steagina area-geçiş bölgesine koyar.)
+git add .
+
+//- Geçiş alanından git deposuna kayıt için kullanılır. (bir kopya oluşturur. -versiyon)
+git commit -m "kopya açıklaması"
+
+//- Kopyaları listelemk için 
+git log 
+
+// git status(çalışma dizininiz ile git deponuz arasındaki farklılıkları listeler)
+//eğer klasörünüz ile commit edilmiş hali arasında değişiklil yoksa bunu ifade eder.
+//on branch master ifadesi git ile projemizin default ifadesidir. projemizin ismi master olarak ifade edilir.
+git status
+
+//geçiş bölgesine dosya ismi vererek kaydetme
+git add cikarma.py
+git commit -m "çıkarma metodu eklendi"
+git status
+
+//bir dosyada değişiklik yapıldıktan sonra(içerik)
+git status (madified: dosya adı yazar.)
+
+//Değişiklikleri görmek için
+git diff  yazarsak değişiklikleri listeler.(çalışma dosyası ile steaging area-geçiş alanı arasındaki)
+
+git diff --staged //geçiş alanı ile git deposu arasındaki farkları listeler.
+
+//silinen dosyayı geçiş bölgesine kelemek için
+git add dosyaadi veya
+git rm dosyaadi  kullanılabilir. ikisi de aynı işi görür.
+
+(git log problem çıkarsa q z veya ctrl+z ile komut işlemine devam edilebilir.)
+
+
+//klasör ce içindeki dosyaları silme
+// -r recursive anlamına gelir. klasörün içindekileri de sil anlamında.
+$ git rm -r silinecekler/
+
+// dosyanın ismini kod ile değiştirme(mv aynı zamanda taşımak için de kullanılır)
+$ git mv deneme1.py deneme2.txt
+
+//--------- değişiklikleri geri alma-------
+//git dosyasına kaydedilmemiş(add+commit edilmemiş) dosyalardaki değişiklikleri geri almak için 
+// aynı şekilde silinen dosyaları da geri almak için bu kod kullanılır.(add edilmemişse)
+ $ git checkout -- index.txt
+
+ // geçiş bölgesine kaydedilmiş işlemi geri alma (add in tersi)+silinen dosyayı geri getirme
+ $ git reset HEAD index.txt
+ $ git checkout -- index.txt
+ 
+
+//Verisyonlar arasında geçiş (buradaki . tüm değişiklikleri getirir.)
+
+$ git checkout b92de12793b3e70db15f39341d84ab85fc77aca7 -- .
+
+//-gitHub.com hesap oluşturma
+//-gitHub git ile aynı şey değildir. kodlarımızı git ile senkronize uzak sunucuda saklamaızı sağlayan bir depodur.
+1- gitHub a kayıt yapılır.
+2- Repository(Depo) oluşturulur
+3- public:herkese açık-private:özel seçimi yapılır.(private ücretli)-gitLab da private ücretsiz.
+4- Initialize this repository with a README(README adında bilgi dosyası oluşturur.)
+
+//gitHub bağlantısı oluşturma
+remote add: uzak bağlantı
+githubRepo1: uzak bağlantının adı(herangi bir şey olabilir.)
+https://github.com/suleymanaktrk/yeni-basladim.git : git hesabımızdaki repostory(depo) adresi.
+
+
+$ git remote add githubRepo1 https://github.com/suleymanaktrk/yeni-basladim.git
+git remote add repoBlog https://github.com/suleymanaktrk/blogKodlama.git
+
+
+//gitHub dosyaları gönderme
+push: göndermek  -u tüm dosyaları githubRepo1:github reposunun bağlantı adı master: projemizin ana dalı
+$ git push -u githubRepo1 master
+
+
+//-------git tarafından taki edilmesini istemediğimiz dosyalar .gitignore olarak oluşturulur.
+
+1- bir veritabanı dosyası oluşturalım veritabani.accdb
+2- $ cat >> .gitignore // şeklinde gizli bir gitignore dosyası oluşturalım imleç yanıp sönerken veritabani.accdb yazip enterleyelim
+3- ctrl+c ile dosyayı kapatalım
+4- $ cat .gitignore // komutu ile kontrol edelim. 
+5- $ git status // işlemi yaptığımızda veritabaninin takip edilmediğini göreceksiniz.
+6- tabi veritabani.accdb .gitignore e atılmadan önce add veya commit edilmemelidir.
+
+
+
+//-git tarafından takiip edilmeyen klasör ve dosya oluşturma
+1- klasör oluşturlur içine
+2- $ touch dosya {1..5}.html // dosya1.html dosya2.html ... şeklinde 5 adet dosya oluşturur.
+3- .gitignore dosyası açılarak 
+	a- belgeler/*   yazarak belgeler kasörünün içindeki her şey takipten münezzeh kılınır.
+	b- !belgeler/1.html yazılarak 1.html takibe dahil edilir.
+4- git add .
+5- git commit -m "belgeler takipsiz"
+6- $ git push -u githubRepo1 master
+
+
+// Git ile yeni branch(dal) oluşturma- Normalde biz master dalında çalışırız.
+// Aynı projede farklı kişiler varsa ve herkesin görevi belli ise bunlara dallar oluşturulur.
+// herkes işini bitirdikten sonra bu dallar master dal ile birleştirilerek tek bir proje haline gelir.
+// gitHub dosyalarını getirmek için 
+git pull komutu işletilir.
+git branch //dalları listeler.
+git branch --all uzak depodaki dalları da listler.
+git branch yandal2
+
+git checkout yandal2 //yandal2 branşına geçiş yapar.
+git checkout master //master a geçiş yapar.
+git diff master yandal2 //master ile yandal2 arasındaki farkı gözetir.
+git merge yandal2 //master ile yandal2 yi birleştirir.
+$ git push -u githubRepo1 master // maste i uzak depoya yükler.
+
+
+
+
+
+
+
+
